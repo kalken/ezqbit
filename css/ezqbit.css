@@ -1,0 +1,378 @@
+/*
+ * ezqbit — flat dark panels for the qBittorrent WebUI
+ *
+ * @imported from the stock style.css. Only colors and panel chrome change;
+ * icons, layout and markup are stock. Always dark, regardless of the WebUI color-scheme preference.
+ */
+
+/* ---------------------------------------------------------------
+   Palette (tripled :root beats the stock :root.dark block)
+--------------------------------------------------------------- */
+
+:root:root:root {
+    --theme-panel: #1f1f1f; /* toolbar, sidebar, status bar */
+    --theme-content: #141414; /* torrent list, properties */
+    --theme-control: #2c2c2c; /* search field, selection, chips on hover */
+    --theme-separator: #151515; /* dark hairlines on the toolbar */
+    --theme-footer-height: 44px;
+    --theme-progress: linear-gradient(90deg, #3aa655 0%, #b9b745 100%);
+
+    /* Map onto the stock WebUI variables */
+    --color-accent-blue: hsl(210deg 65% 55%);
+    --color-text-blue: hsl(210deg 88% 73%);
+    --color-text-orange: hsl(26deg 65% 70%);
+    --color-text-green: hsl(134deg 55% 55%);
+    --color-text-default: #e6e6e6;
+    --color-background-primary: var(--theme-panel);
+    --color-background-blue: #383838;
+    --color-background-popup: #262626;
+    --color-background-default: var(--theme-panel);
+    --color-background-hover: var(--theme-control);
+    --color-border-blue: hsl(210deg 65% 55%);
+    --color-border-default: #333333;
+    --color-icon-hover: none; /* keep the stock icon colors on hover/selection */
+
+    color-scheme: dark;
+}
+
+/* Everything below is nested in :root, which adds one level of specificity to every rule.
+   The theme is @imported at the top of the stock style.css, so it loads before the stock
+   rules; the extra specificity makes it win regardless of stylesheet order. */
+:root {
+
+* {
+    scrollbar-color: #444444 transparent;
+}
+
+/* Stock dark mode whitens these dark glyphs; do the same when the preference is "light" */
+#rssButtonBar img,
+#startSearchButton img,
+#manageSearchPlugins img {
+    filter: brightness(0) invert(100%);
+}
+
+/* ---------------------------------------------------------------
+   Panels: lighter chrome around a darker content area, no borders
+--------------------------------------------------------------- */
+
+.column:not(#filtersColumn),
+#properties {
+    background-color: var(--theme-content);
+}
+
+.panel,
+.panel-header,
+.columnHandle {
+    border-color: transparent;
+}
+
+/* No border at all here (not just a transparent one), so the sidebar reaches right down
+   to the status bar and nothing shows through between them */
+#pageWrapper {
+    border: 0;
+}
+
+.columnHandle {
+    background-image: none;
+}
+
+.horizontalHandle .handleIcon {
+    opacity: 0.25;
+}
+
+/* Inset the torrent list and the properties tabs from the edges of the content area.
+   A transparent border fakes the margin without breaking mocha's sizing. */
+#transferList #transferList_pad {
+    border: solid transparent;
+    border-width: 8px 14px 0;
+}
+
+#propertiesPanel_header {
+    height: 48px;
+    padding: 6px 10px 0;
+}
+
+#Filters {
+    padding-top: 8px;
+}
+
+/* Lifted above the status bar's edge and shadow, so those start at the sidebar's right
+   edge instead of running across the bottom of the sidebar */
+#filtersColumn {
+    background-color: var(--theme-panel);
+    z-index: 1;
+}
+
+/* The sidebar gets the same dark edge and soft shadow on its right side as the top bar has
+   below it. The column handle carries it, since it is the sidebar's right edge, and its
+   ::after continues the edge down across the status bar, so the sidebar reads as running
+   to the bottom of the window with the status bar beside it. That needs the two clipping
+   ancestors opened up. clip-path keeps the shadow to the right side only. */
+#pageWrapper,
+#filtersColumn_handle {
+    overflow: visible;
+}
+
+#filtersColumn_handle,
+#filtersColumn_handle::after {
+    background-color: var(--theme-panel);
+    box-shadow: 1px 0 0 var(--theme-separator), 2px 0 8px rgb(0 0 0 / 45%);
+}
+
+#filtersColumn_handle {
+    border: 0; /* so ::after spans its full width */
+    clip-path: inset(0 -12px calc(-1 * var(--theme-footer-height)) 0);
+    position: relative;
+    z-index: 1;
+}
+
+#filtersColumn_handle::after {
+    bottom: calc(-1 * var(--theme-footer-height));
+    content: "";
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 50%; /* overlaps the handle, so there is no seam where the two meet */
+    width: 100%;
+}
+
+/* ---------------------------------------------------------------
+   Toolbar: one roomy row, hairline dividers, search and tabs on the right
+--------------------------------------------------------------- */
+
+/* The top bar sits above the sidebar and content, edged by a dark line and a soft shadow.
+   z-index because #pageWrapper is positioned and would otherwise paint over the shadow. */
+#desktopHeader {
+    box-shadow: 0 1px 0 var(--theme-separator), 0 2px 8px rgb(0 0 0 / 45%);
+    position: relative;
+    z-index: 2;
+}
+
+#mochaToolbar {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 0;
+    padding: 10px 14px;
+}
+
+/* Lets the queue buttons line up as toolbar items like the rest */
+#queueingButtons:not(.invisible) {
+    display: contents;
+}
+
+.mochaToolButton {
+    display: block;
+    margin: 0 5px;
+}
+
+/* Stock icons, drawn white: toolbar buttons and the Transfers / Search / … tabs */
+#mochaToolbar img {
+    filter: brightness(0) invert(100%);
+}
+
+#mochaToolbar .divider {
+    background: linear-gradient(var(--theme-separator) 0 0) left center / 1px 100% no-repeat;
+    margin-left: 8px;
+    padding: 8px 0 8px 14px;
+}
+
+#torrentsFilterToolbar:not(.invisible) {
+    align-items: center;
+    display: flex;
+    gap: 6px;
+    margin-left: auto;
+    order: 1;
+    position: relative;
+}
+
+#mainWindowTabs {
+    float: none;
+    margin: 0 0 0 8px;
+    order: 2;
+}
+
+#mochaToolbar:has(#torrentsFilterToolbar.invisible) #mainWindowTabs {
+    margin-left: auto;
+}
+
+#torrentsFilterInput,
+#torrentsFilterRegexBox + label,
+#torrentsFilterSelect {
+    background-color: var(--theme-control);
+    border-color: transparent;
+    border-radius: 6px;
+    height: 30px;
+    margin: 0;
+}
+
+#torrentsFilterInput {
+    min-width: 220px;
+    padding-left: 30px;
+}
+
+#torrentsFilterRegexBox + label {
+    width: 30px;
+}
+
+/* Search and regex glyphs in white: the stock icon files are used as masks over a white
+   box instead of as (blue) background images. An <input> has no pseudo-elements, so the
+   search glyph is drawn by the surrounding toolbar, over the left end of the field. */
+#torrentsFilterInput,
+#torrentsFilterRegexBox + label,
+#torrentsFilterRegexBox:checked + label {
+    background-image: none;
+}
+
+#torrentsFilterToolbar::before,
+#torrentsFilterRegexBox + label::before {
+    background-color: #ffffff;
+    content: "";
+    height: 16px;
+    mask: url("../images/edit-find.svg") center / contain no-repeat;
+    pointer-events: none;
+    width: 16px;
+}
+
+#torrentsFilterToolbar::before {
+    left: 8px;
+    position: absolute;
+}
+
+#torrentsFilterRegexBox + label::before {
+    display: block;
+    margin: 6px;
+    mask-image: url("../images/regex.svg");
+}
+
+#torrentsFilterRegexBox:checked + label {
+    border-color: var(--color-accent-blue);
+}
+
+/* ---------------------------------------------------------------
+   Sidebar: bold section titles, pill selection flush with the left edge
+--------------------------------------------------------------- */
+
+.filterTitle {
+    font-size: 14px;
+    padding: 8px 0 6px 10px;
+    text-transform: none;
+}
+
+ul.filterList span.link {
+    border-radius: 0 999px 999px 0;
+    gap: 8px;
+    margin-right: 16px;
+    padding: 5px 10px 5px 12px;
+}
+
+/* ---------------------------------------------------------------
+   Tables: borderless header, roomier rows
+--------------------------------------------------------------- */
+
+.dynamicTable th {
+    border-right-color: transparent;
+    font-weight: normal;
+    padding: 8px 6px;
+}
+
+#propertiesPanel .dynamicTableFixedHeaderDiv,
+#torrentsTableFixedHeaderDiv {
+    border-bottom-color: transparent;
+}
+
+.dynamicTable td,
+#transferList .dynamicTable td {
+    padding: 6px;
+}
+
+.altRowColors tbody tr:nth-child(odd of :not(.invisible)) {
+    background-color: rgb(255 255 255 / 3%);
+}
+
+/* The bar draws inside a shadow root but reads these inherited variables */
+progress-bar {
+    --color-background-blue: var(--theme-progress);
+    --color-background-default: var(--theme-panel);
+    --color-border-default: transparent;
+    --color-text-default: #ffffff;
+
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+/* ---------------------------------------------------------------
+   Tabs (Transfers / Search / …, General / Trackers / …) as chips
+--------------------------------------------------------------- */
+
+.tab-menu li a {
+    border-radius: 4px;
+    padding: 4px 10px;
+}
+
+/* On the toolbar the chips need a shade that differs from the panel */
+#mainWindowTabsList li:not(.selected, :hover) a {
+    background-color: var(--theme-control);
+}
+
+/* General / Trackers / …: larger chips, spaced apart, with light grey stock icons */
+#propertiesTabs li a {
+    font-size: 12px;
+    gap: 8px;
+    margin-left: 10px;
+    padding: 8px 14px;
+}
+
+#propertiesTabs li:first-child a {
+    margin-left: 4px;
+}
+
+#propertiesTabs li img {
+    filter: brightness(0) invert(80%);
+}
+
+/* ---------------------------------------------------------------
+   Status bar
+--------------------------------------------------------------- */
+
+/* Taller, centered, no separator glyphs; mocha measures this height, so the layout follows */
+#desktopFooterWrapper,
+#desktopFooter {
+    height: var(--theme-footer-height);
+}
+
+/* Same dark edge and soft shadow as the top bar, cast upwards */
+#desktopFooterWrapper {
+    box-shadow: 0 -1px 0 var(--theme-separator), 0 -2px 8px rgb(0 0 0 / 45%);
+}
+
+#desktopFooter {
+    align-items: center;
+    display: flex;
+    font-size: 12px;
+    padding: 0 14px;
+}
+
+#desktopFooter table {
+    margin: 0 auto !important;
+}
+
+#desktopFooter td {
+    vertical-align: middle;
+}
+
+td.statusBarSeparator {
+    background-image: none;
+    width: 32px;
+}
+
+/* ---------------------------------------------------------------
+   Floating windows
+--------------------------------------------------------------- */
+
+.mocha {
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px #333333, 0 20px 50px rgb(0 0 0 / 60%);
+}
+}
