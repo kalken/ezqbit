@@ -343,6 +343,20 @@ progress-bar {
     height: var(--theme-footer-height);
 }
 
+/* The status bar starts at the sidebar's right edge instead of the window's left edge, so
+   its contents never run in under the sidebar when the window is narrow. CSS anchor
+   positioning reads where that edge is (the sidebar is resizable); with the sidebar
+   hidden, or in a browser without anchor positioning, it stays full width. */
+#filtersColumn_handle {
+    anchor-name: --theme-sidebar-edge;
+}
+
+#desktopFooterWrapper {
+    left: anchor(--theme-sidebar-edge right, 0px);
+    right: 0;
+    width: auto;
+}
+
 /* Same hairline as the top bar, along the top */
 #desktopFooterWrapper {
     box-shadow: 0 -1px 0 var(--theme-hairline), 0 -1px 4px var(--theme-edge-shadow);
@@ -361,6 +375,7 @@ progress-bar {
 
 #desktopFooter td {
     vertical-align: middle;
+    white-space: nowrap;
 }
 
 td.statusBarSeparator {
