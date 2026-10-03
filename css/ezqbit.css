@@ -14,6 +14,8 @@
     --theme-content: #141414; /* torrent list, properties */
     --theme-control: #2c2c2c; /* search field, selection, chips on hover */
     --theme-separator: #151515; /* dark hairlines on the toolbar */
+    --theme-edge: #1a1a1a; /* edge of the top bar, sidebar and status bar */
+    --theme-edge-shadow: rgb(0 0 0 / 18%);
     --theme-footer-height: 44px;
     --theme-progress: linear-gradient(90deg, #3aa655 0%, #b9b745 100%);
 
@@ -116,12 +118,12 @@
 #filtersColumn_handle,
 #filtersColumn_handle::after {
     background-color: var(--theme-panel);
-    box-shadow: 1px 0 0 var(--theme-separator), 2px 0 8px rgb(0 0 0 / 45%);
+    box-shadow: 1px 0 0 var(--theme-edge), 1px 0 4px var(--theme-edge-shadow);
 }
 
 #filtersColumn_handle {
     border: 0; /* so ::after spans its full width */
-    clip-path: inset(0 -12px calc(-1 * var(--theme-footer-height)) 0);
+    clip-path: inset(0 -6px calc(-1 * var(--theme-footer-height)) 0);
     position: relative;
     z-index: 1;
 }
@@ -143,7 +145,7 @@
 /* The top bar sits above the sidebar and content, edged by a dark line and a soft shadow.
    z-index because #pageWrapper is positioned and would otherwise paint over the shadow. */
 #desktopHeader {
-    box-shadow: 0 1px 0 var(--theme-separator), 0 2px 8px rgb(0 0 0 / 45%);
+    box-shadow: 0 1px 0 var(--theme-edge), 0 1px 4px var(--theme-edge-shadow);
     position: relative;
     z-index: 2;
 }
@@ -344,7 +346,7 @@ progress-bar {
 
 /* Same dark edge and soft shadow as the top bar, cast upwards */
 #desktopFooterWrapper {
-    box-shadow: 0 -1px 0 var(--theme-separator), 0 -2px 8px rgb(0 0 0 / 45%);
+    box-shadow: 0 -1px 0 var(--theme-edge), 0 -1px 4px var(--theme-edge-shadow);
 }
 
 #desktopFooter {
