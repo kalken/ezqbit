@@ -14,7 +14,7 @@
     --theme-content: #141414; /* torrent list, properties */
     --theme-control: #2c2c2c; /* search field, selection, chips on hover */
     --theme-hairline: rgb(0 0 0 / 28%); /* every 1px line: panel edges, toolbar dividers */
-    --theme-edge-shadow: rgb(0 0 0 / 30%); /* small 4px shadow beside panel and window edges */
+    --theme-edge-shadow: rgb(0 0 0 / 40%); /* small 6px shadow beside panel and window edges */
     --theme-footer-height: 44px;
     --theme-progress: linear-gradient(90deg, #b9b745 0%, #3aa655 100%);
 
@@ -99,14 +99,14 @@
 #filtersColumn_handle,
 #filtersColumn_handle::after {
     background: var(--theme-panel);
-    box-shadow: 1px 0 0 var(--theme-hairline), 1px 0 4px var(--theme-edge-shadow);
+    box-shadow: 1px 0 0 var(--theme-hairline), 1px 0 6px var(--theme-edge-shadow);
 }
 
 #filtersColumn_handle {
     anchor-name: --theme-sidebar-edge; /* the status bar starts here, see below */
     border: 0; /* so ::after spans its full width */
     /* keeps the shadow to the right side only */
-    clip-path: inset(0 -6px calc(-1 * var(--theme-footer-height)) 0);
+    clip-path: inset(0 -8px calc(-1 * var(--theme-footer-height)) 0);
     overflow: visible;
     position: relative;
     z-index: 1;
@@ -129,7 +129,7 @@
 /* The top bar is edged by a hairline along its bottom.
    z-index because #pageWrapper is positioned and would otherwise paint over the line. */
 #desktopHeader {
-    box-shadow: 0 1px 0 var(--theme-hairline), 0 1px 4px var(--theme-edge-shadow);
+    box-shadow: 0 1px 0 var(--theme-hairline), 0 1px 6px var(--theme-edge-shadow);
     position: relative;
     z-index: 2;
 }
@@ -335,7 +335,7 @@ progress-bar {
    resizable); with the sidebar hidden, or in a browser without anchor positioning, it
    stays full width. */
 #desktopFooterWrapper {
-    box-shadow: 0 -1px 0 var(--theme-hairline), 0 -1px 4px var(--theme-edge-shadow);
+    box-shadow: 0 -1px 0 var(--theme-hairline), 0 -1px 6px var(--theme-edge-shadow);
     height: var(--theme-footer-height);
     left: anchor(--theme-sidebar-edge right, 0px);
     right: 0;
@@ -369,6 +369,6 @@ td.statusBarSeparator {
 
 .mocha {
     border-radius: 10px;
-    box-shadow: 0 0 0 1px var(--theme-hairline), 0 0 4px var(--theme-edge-shadow);
+    box-shadow: 0 0 0 1px var(--theme-hairline), 0 0 6px var(--theme-edge-shadow);
 }
 }
