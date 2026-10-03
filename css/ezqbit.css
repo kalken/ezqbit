@@ -13,8 +13,8 @@
     --theme-panel: #1f1f1f; /* toolbar, sidebar, status bar */
     --theme-content: #121212; /* torrent list, properties */
     --theme-control: #2c2c2c; /* search field, selection, chips on hover */
-    --theme-divider: #2d2d2d; /* light lines between toolbar icon groups */
-    --theme-edge-shadow: rgb(0 0 0 / 40%); /* soft 6px shadow beside panel and window edges */
+    --theme-hairline: rgb(0 0 0 / 28%); /* every 1px line: panel edges, toolbar dividers */
+    --theme-edge-shadow: rgb(0 0 0 / 40%); /* small 6px shadow beside panel and window edges */
     --theme-footer-height: 44px;
     --theme-progress: linear-gradient(90deg, #b9b745 0%, #3aa655 100%);
 
@@ -91,7 +91,7 @@
     padding-top: 8px;
 }
 
-/* The sidebar casts the same soft shadow to its right as the top bar does below it. The
+/* The sidebar gets the same hairline and shadow on its right side as the top bar has below it. The
    column handle carries it, since it is the sidebar's right edge, and its ::after continues
    it down beside the status bar, so the sidebar reads as running to the bottom of the
    window. For that, the handle and #pageWrapper must not clip, and #pageWrapper has no
@@ -112,10 +112,10 @@
     z-index: 1;
 }
 
-/* One box for the whole height, so the shadow is a single unbroken strip */
+/* One box for the whole height, so the line and shadow are a single unbroken strip */
 #filtersColumn_handle::after {
     background: var(--theme-panel);
-    box-shadow: 1px 0 6px var(--theme-edge-shadow);
+    box-shadow: 1px 0 0 var(--theme-hairline), 1px 0 6px var(--theme-edge-shadow);
     content: "";
     inset: 0 0 calc(-1 * var(--theme-footer-height));
     pointer-events: none;
@@ -123,13 +123,13 @@
 }
 
 /* ---------------------------------------------------------------
-   Toolbar: one roomy row, light dividers, search and tabs on the right
+   Toolbar: one roomy row, hairline dividers, search and tabs on the right
 --------------------------------------------------------------- */
 
-/* The top bar casts a soft shadow onto the sidebar and content below it.
+/* The top bar is edged by a hairline and a small shadow along its bottom.
    z-index because #pageWrapper is positioned and would otherwise paint over the shadow. */
 #desktopHeader {
-    box-shadow: 0 1px 6px var(--theme-edge-shadow);
+    box-shadow: 0 1px 0 var(--theme-hairline), 0 1px 6px var(--theme-edge-shadow);
     position: relative;
     z-index: 2;
 }
@@ -159,7 +159,7 @@
 }
 
 #mochaToolbar .divider {
-    background: linear-gradient(var(--theme-divider) 0 0) left center / 1px 100% no-repeat;
+    background: linear-gradient(var(--theme-hairline) 0 0) left center / 1px 100% no-repeat;
     margin-left: 8px;
     padding: 8px 0 8px 14px;
 }
@@ -329,13 +329,13 @@ progress-bar {
     height: var(--theme-footer-height);
 }
 
-/* Same soft shadow as the top bar, cast upwards. The bar starts at the sidebar's right edge
+/* Same hairline and shadow as the top bar, along the top. The bar starts at the sidebar's right edge
    instead of the window's left edge, so its contents never run in under the sidebar when
    the window is narrow. CSS anchor positioning reads where that edge is (the sidebar is
    resizable); with the sidebar hidden, or in a browser without anchor positioning, it
    stays full width. */
 #desktopFooterWrapper {
-    box-shadow: 0 -1px 6px var(--theme-edge-shadow);
+    box-shadow: 0 -1px 0 var(--theme-hairline), 0 -1px 6px var(--theme-edge-shadow);
     height: var(--theme-footer-height);
     left: anchor(--theme-sidebar-edge right, 0px);
     right: 0;
@@ -369,6 +369,6 @@ td.statusBarSeparator {
 
 .mocha {
     border-radius: 10px;
-    box-shadow: 0 0 0 1px rgb(0 0 0 / 28%), 0 0 6px var(--theme-edge-shadow);
+    box-shadow: 0 0 0 1px var(--theme-hairline), 0 0 6px var(--theme-edge-shadow);
 }
 }
