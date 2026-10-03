@@ -13,9 +13,8 @@
     --theme-panel: #1f1f1f; /* toolbar, sidebar, status bar */
     --theme-content: #141414; /* torrent list, properties */
     --theme-control: #2c2c2c; /* search field, selection, chips on hover */
-    --theme-separator: #151515; /* dark hairlines on the toolbar */
-    --theme-edge: #1a1a1a; /* edge of the top bar, sidebar and status bar */
-    --theme-edge-shadow: rgb(0 0 0 / 18%);
+    --theme-hairline: rgb(0 0 0 / 28%); /* every 1px line: panel edges, toolbar dividers */
+    --theme-edge-shadow: rgb(0 0 0 / 30%); /* small 4px shadow beside the panel edges */
     --theme-footer-height: 44px;
     --theme-progress: linear-gradient(90deg, #3aa655 0%, #b9b745 100%);
 
@@ -98,18 +97,17 @@
     padding-top: 8px;
 }
 
-/* Lifted above the status bar's edge and shadow, so those start at the sidebar's right
+/* Lifted above the status bar's hairline, so that starts at the sidebar's right
    edge instead of running across the bottom of the sidebar */
 #filtersColumn {
     background-color: var(--theme-panel);
     z-index: 1;
 }
 
-/* The sidebar gets the same dark edge and soft shadow on its right side as the top bar has
-   below it. The column handle carries it, since it is the sidebar's right edge, and its
-   ::after continues the edge down across the status bar, so the sidebar reads as running
-   to the bottom of the window with the status bar beside it. That needs the two clipping
-   ancestors opened up. clip-path keeps the shadow to the right side only. */
+/* The sidebar gets the same hairline on its right side as the top bar has below it. The
+   column handle carries it, since it is the sidebar's right edge, and its ::after continues
+   the line down across the status bar, so the sidebar reads as running to the bottom of the
+   window with the status bar beside it. That needs the two clipping ancestors opened up. */
 #pageWrapper,
 #filtersColumn_handle {
     overflow: visible;
@@ -118,11 +116,12 @@
 #filtersColumn_handle,
 #filtersColumn_handle::after {
     background-color: var(--theme-panel);
-    box-shadow: 1px 0 0 var(--theme-edge), 1px 0 4px var(--theme-edge-shadow);
+    box-shadow: 1px 0 0 var(--theme-hairline), 1px 0 4px var(--theme-edge-shadow);
 }
 
 #filtersColumn_handle {
     border: 0; /* so ::after spans its full width */
+    /* keeps the shadow to the right side only */
     clip-path: inset(0 -6px calc(-1 * var(--theme-footer-height)) 0);
     position: relative;
     z-index: 1;
@@ -142,10 +141,10 @@
    Toolbar: one roomy row, hairline dividers, search and tabs on the right
 --------------------------------------------------------------- */
 
-/* The top bar sits above the sidebar and content, edged by a dark line and a soft shadow.
-   z-index because #pageWrapper is positioned and would otherwise paint over the shadow. */
+/* The top bar is edged by a hairline along its bottom.
+   z-index because #pageWrapper is positioned and would otherwise paint over the line. */
 #desktopHeader {
-    box-shadow: 0 1px 0 var(--theme-edge), 0 1px 4px var(--theme-edge-shadow);
+    box-shadow: 0 1px 0 var(--theme-hairline), 0 1px 4px var(--theme-edge-shadow);
     position: relative;
     z-index: 2;
 }
@@ -175,7 +174,7 @@
 }
 
 #mochaToolbar .divider {
-    background: linear-gradient(var(--theme-separator) 0 0) left center / 1px 100% no-repeat;
+    background: linear-gradient(var(--theme-hairline) 0 0) left center / 1px 100% no-repeat;
     margin-left: 8px;
     padding: 8px 0 8px 14px;
 }
@@ -344,9 +343,9 @@ progress-bar {
     height: var(--theme-footer-height);
 }
 
-/* Same dark edge and soft shadow as the top bar, cast upwards */
+/* Same hairline as the top bar, along the top */
 #desktopFooterWrapper {
-    box-shadow: 0 -1px 0 var(--theme-edge), 0 -1px 4px var(--theme-edge-shadow);
+    box-shadow: 0 -1px 0 var(--theme-hairline), 0 -1px 4px var(--theme-edge-shadow);
 }
 
 #desktopFooter {
