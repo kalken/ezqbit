@@ -100,6 +100,11 @@
     padding: 6px 10px 0;
 }
 
+/* The Execution Log's tab row gets the same breathing room */
+#LogPanel_header {
+    padding: 8px 12px 2px;
+}
+
 /* Same inset for the panel below the tabs, so its boxes do not sit against the sidebar */
 #propertiesPanel {
     padding: 0 14px;
@@ -291,7 +296,9 @@ ul.filterList span.link {
     padding: 6px;
 }
 
-.altRowColors tbody tr:nth-child(odd of :not(.invisible)) {
+/* :where() keeps this as weak as the stock rule it replaces, so the stock hover and
+   selection colors still win on tinted rows */
+:where(.altRowColors) tbody tr:nth-child(odd of :not(.invisible)) {
     background-color: var(--theme-row-tint);
 }
 
