@@ -314,6 +314,12 @@ progress-bar {
     filter: brightness(0) invert(80%);
 }
 
+/* Show/hide toggle of the properties panel: the stock blue arrow, drawn white */
+.panel-collapse,
+.panel-expand {
+    filter: brightness(0) invert(100%);
+}
+
 /* ---------------------------------------------------------------
    Status bar
 --------------------------------------------------------------- */
