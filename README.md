@@ -5,7 +5,7 @@ A flat alternative WebUI for qBittorrent, in dark and light:
 - top bar, sidebar and status bar framing the torrent list, separated by thin edges with a
   soft shadow
 - sidebar with pill selection and bold section titles
-- single-color toolbar icons (white in dark, black in light), hairline dividers, search
+- single-color toolbar icons (white in dark, dark grey in light), hairline dividers, search
   field and tabs on the right
 - General / Trackers / Peers / … as chips
 - yellow→green progress bars

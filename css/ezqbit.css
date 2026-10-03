@@ -17,9 +17,9 @@
     --theme-control: #e2e2e2; /* search field, selection, chips on hover */
     --theme-hairline: rgb(0 0 0 / 12%); /* every 1px line: panel edges, toolbar dividers */
     --theme-edge-shadow: rgb(0 0 0 / 14%); /* small 6px shadow beside panel and window edges */
-    --theme-icon: brightness(0); /* stock icons drawn in one color: toolbar, tabs, toggle */
-    --theme-icon-muted: brightness(0) invert(30%); /* General / Trackers / … icons */
-    --theme-glyph: #000000; /* search and regex glyphs */
+    --theme-icon: brightness(0) invert(35%); /* stock icons drawn in one color: toolbar, tabs, toggle */
+    --theme-icon-muted: brightness(0) invert(35%); /* General / Trackers / … icons */
+    --theme-glyph: #595959; /* search and regex glyphs */
     --theme-row-tint: rgb(0 0 0 / 4%); /* alternating rows */
     --theme-scrollbar: #c2c2c2;
     --theme-footer-height: 44px;
