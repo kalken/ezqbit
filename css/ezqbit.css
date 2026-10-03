@@ -269,7 +269,11 @@ ul.filterList span.link {
     padding: 6px;
 }
 
-.altRowColors tbody tr:nth-child(odd of :not(.invisible)) {
+/* The same faint tint on every other row with "alternating row colors" on, and on every
+   row with it off. :where() keeps the second selector weak, so the stock hover and
+   selection colours still win. */
+.altRowColors tbody tr:nth-child(odd of :not(.invisible)),
+:where(.dynamicTableDiv:not(.altRowColors)) tbody tr {
     background-color: rgb(255 255 255 / 3%);
 }
 
