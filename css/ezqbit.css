@@ -14,7 +14,7 @@
     --theme-content: #141414; /* torrent list, properties */
     --theme-control: #2c2c2c; /* search field, selection, chips on hover */
     --theme-hairline: rgb(0 0 0 / 28%); /* every 1px line: panel edges, toolbar dividers */
-    --theme-edge-shadow: rgb(0 0 0 / 30%); /* small 4px shadow beside the panel edges */
+    --theme-edge-shadow: rgb(0 0 0 / 30%); /* small 4px shadow beside panel and window edges */
     --theme-footer-height: 44px;
     --theme-progress: linear-gradient(90deg, #3aa655 0%, #b9b745 100%);
 
@@ -389,6 +389,6 @@ td.statusBarSeparator {
 
 .mocha {
     border-radius: 10px;
-    box-shadow: 0 0 0 1px #333333, 0 20px 50px rgb(0 0 0 / 60%);
+    box-shadow: 0 0 0 1px var(--theme-hairline), 0 0 4px var(--theme-edge-shadow);
 }
 }
