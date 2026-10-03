@@ -82,6 +82,11 @@
     padding: 6px 10px 0;
 }
 
+/* Same inset for the panel below the tabs, so its boxes do not sit against the sidebar */
+#propertiesPanel {
+    padding: 0 14px;
+}
+
 #Filters {
     padding-top: 8px;
 }
@@ -96,14 +101,9 @@
     overflow: visible;
 }
 
-#filtersColumn_handle,
-#filtersColumn_handle::after {
-    background: var(--theme-panel);
-    box-shadow: 1px 0 6px var(--theme-edge-shadow);
-}
-
 #filtersColumn_handle {
     anchor-name: --theme-sidebar-edge; /* the status bar starts here, see below */
+    background: var(--theme-panel);
     border: 0; /* so ::after spans its full width */
     /* keeps the shadow to the right side only */
     clip-path: inset(0 -8px calc(-1 * var(--theme-footer-height)) 0);
@@ -112,14 +112,14 @@
     z-index: 1;
 }
 
+/* One box for the whole height, so the shadow is a single unbroken strip */
 #filtersColumn_handle::after {
-    bottom: calc(-1 * var(--theme-footer-height));
+    background: var(--theme-panel);
+    box-shadow: 1px 0 6px var(--theme-edge-shadow);
     content: "";
-    left: 0;
+    inset: 0 0 calc(-1 * var(--theme-footer-height));
     pointer-events: none;
     position: absolute;
-    top: 50%; /* overlaps the handle, so there is no seam where the two meet */
-    width: 100%;
 }
 
 /* ---------------------------------------------------------------
