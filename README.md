@@ -16,6 +16,10 @@ files get one added `@import` line each (see [What changed](#what-changed-compar
 
 The theme runs offline: no web fonts, CDNs or external images. The icons are qBittorrent's own.
 
+![Main view](docs/screenshot-main.png)
+
+![Login](docs/screenshot-login.png)
+
 Written against the qBittorrent **5.2.x** WebUI. Build it from the same qBittorrent
 version you run, since an alternative WebUI replaces the whole built-in one.
 
