@@ -1,14 +1,18 @@
 # ezqbit
 
-A flat dark alternative WebUI for qBittorrent:
+A flat alternative WebUI for qBittorrent, in dark and light:
 
-- lighter top bar, sidebar and status bar framing a darker torrent list, separated by
-  dark edges with a soft shadow
+- top bar, sidebar and status bar framing the torrent list, separated by thin edges with a
+  soft shadow
 - sidebar with pill selection and bold section titles
-- white toolbar icons, hairline dividers, search field and tabs on the right
+- single-color toolbar icons (white in dark, black in light), hairline dividers, search
+  field and tabs on the right
 - General / Trackers / Peers / … as chips
 - yellow→green progress bars
-- dark dialogs, menus and login page
+- matching dialogs, menus and login page
+
+Dark or light follows the WebUI's own setting (Options → Behavior → Color scheme: auto, light
+or dark). The login page follows the browser's preference, like the stock one.
 
 This repo contains only the theme's CSS. `build.sh` (or `build.ps1` on Windows) combines it with
 the original qBittorrent WebUI files: every stock HTML, JavaScript and image file stays untouched, and only two stock CSS
@@ -16,7 +20,9 @@ files get one added `@import` line each (see [What changed](#what-changed-compar
 
 The theme runs offline: no web fonts, CDNs or external images. The icons are qBittorrent's own.
 
-![Main view](docs/screenshot-main.png)
+![Main view, dark](docs/screenshot-main.png)
+
+![Main view, light](docs/screenshot-main-light.png)
 
 ![Login](docs/screenshot-login.png)
 
@@ -59,8 +65,8 @@ Only CSS, applied by `build.sh` / `build.ps1` to the original WebUI files:
 - `private/css/ezqbit.css`: the whole theme (from `css/` in this repo)
 - `public/css/ezqbit-login.css`: login page (from `css/` in this repo)
 
-The theme adds no image files and embeds none: the white toolbar, tab and search icons are the
-stock icons, recoloured from CSS.
+The theme adds no image files and embeds none: the single-color toolbar, tab and search icons are
+the stock icons, recoloured from CSS.
 
 ## Locked out?
 
@@ -108,7 +114,7 @@ Package it with an overlay in a NixOS module, e.g. `qbit-theme.nix`:
         '';
 
         meta = {
-          description = "Flat dark alternative WebUI for qBittorrent";
+          description = "Flat alternative WebUI for qBittorrent, dark and light";
           homepage = "https://github.com/kalken/ezqbit";
           license = lib.licenses.gpl3Plus;
           platforms = lib.platforms.all;

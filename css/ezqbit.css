@@ -1,39 +1,64 @@
 /*
- * ezqbit — flat dark panels for the qBittorrent WebUI
+ * ezqbit — flat panels for the qBittorrent WebUI, dark and light
  *
  * @imported from the stock style.css. Only colors and panel chrome change;
- * icons, layout and markup are stock. Always dark, regardless of the WebUI color-scheme preference.
+ * icons, layout and markup are stock. Follows the WebUI's own color scheme setting
+ * (Options → Behavior): the stock script puts the class "dark" on the root element.
  */
 
 /* ---------------------------------------------------------------
-   Palette (tripled :root beats the stock :root.dark block)
+   Palette: light by default, dark under .dark, like the stock stylesheet
+   (the tripled :root beats the stock :root and :root.dark blocks)
 --------------------------------------------------------------- */
 
 :root:root:root {
-    --theme-panel: #1f1f1f; /* toolbar, sidebar, status bar */
-    --theme-content: #121212; /* torrent list, properties */
-    --theme-control: #2c2c2c; /* search field, selection, chips on hover */
-    --theme-hairline: rgb(0 0 0 / 28%); /* every 1px line: panel edges, toolbar dividers */
-    --theme-edge-shadow: rgb(0 0 0 / 40%); /* small 6px shadow beside panel and window edges */
+    --theme-panel: #f0f0f0; /* toolbar, sidebar, status bar */
+    --theme-content: #ffffff; /* torrent list, properties */
+    --theme-control: #e2e2e2; /* search field, selection, chips on hover */
+    --theme-hairline: rgb(0 0 0 / 12%); /* every 1px line: panel edges, toolbar dividers */
+    --theme-edge-shadow: rgb(0 0 0 / 14%); /* small 6px shadow beside panel and window edges */
+    --theme-icon: brightness(0); /* stock icons drawn in one color: toolbar, tabs, toggle */
+    --theme-icon-muted: brightness(0) invert(30%); /* General / Trackers / … icons */
+    --theme-glyph: #000000; /* search and regex glyphs */
+    --theme-row-tint: rgb(0 0 0 / 4%); /* alternating rows */
+    --theme-scrollbar: #c2c2c2;
     --theme-footer-height: 44px;
     --theme-progress: linear-gradient(90deg, #b9b745 0%, #3aa655 100%);
 
     /* Map onto the stock WebUI variables */
+    --color-text-default: #262626;
+    --color-text-white: #111111; /* stock uses this for text on hover/selection */
+    --color-background-primary: var(--theme-panel);
+    --color-background-blue: #d4d4d4;
+    --color-background-popup: #ffffff;
+    --color-background-default: var(--theme-panel);
+    --color-background-hover: var(--theme-control);
+    --color-border-default: #d0d0d0;
+    --color-icon-hover: none; /* keep the stock icon colors on hover/selection */
+}
+
+:root:root:root.dark {
+    --theme-panel: #1f1f1f;
+    --theme-content: #121212;
+    --theme-control: #2c2c2c;
+    --theme-hairline: rgb(0 0 0 / 28%);
+    --theme-edge-shadow: rgb(0 0 0 / 40%);
+    --theme-icon: brightness(0) invert(100%);
+    --theme-icon-muted: brightness(0) invert(80%);
+    --theme-glyph: #ffffff;
+    --theme-row-tint: rgb(255 255 255 / 3%);
+    --theme-scrollbar: #444444;
+
     --color-accent-blue: hsl(210deg 65% 55%);
     --color-text-blue: hsl(210deg 88% 73%);
     --color-text-orange: hsl(26deg 65% 70%);
     --color-text-green: hsl(134deg 55% 55%);
     --color-text-default: #e6e6e6;
-    --color-background-primary: var(--theme-panel);
+    --color-text-white: #ffffff;
     --color-background-blue: #383838;
     --color-background-popup: #262626;
-    --color-background-default: var(--theme-panel);
-    --color-background-hover: var(--theme-control);
     --color-border-blue: hsl(210deg 65% 55%);
     --color-border-default: #333333;
-    --color-icon-hover: none; /* keep the stock icon colors on hover/selection */
-
-    color-scheme: dark;
 }
 
 /* Everything below is nested in :root, which adds one level of specificity to every rule.
@@ -42,14 +67,7 @@
 :root {
 
 * {
-    scrollbar-color: #444444 transparent;
-}
-
-/* Stock dark mode whitens these dark glyphs; do the same when the preference is "light" */
-#rssButtonBar img,
-#startSearchButton img,
-#manageSearchPlugins img {
-    filter: brightness(0) invert(100%);
+    scrollbar-color: var(--theme-scrollbar) transparent;
 }
 
 /* ---------------------------------------------------------------
@@ -157,9 +175,9 @@
     margin: 0 5px;
 }
 
-/* Stock icons, drawn white: toolbar buttons and the Transfers / Search / … tabs */
+/* Stock icons in one color: toolbar buttons and the Transfers / Search / … tabs */
 #mochaToolbar img {
-    filter: brightness(0) invert(100%);
+    filter: var(--theme-icon);
 }
 
 #mochaToolbar .divider {
@@ -187,8 +205,8 @@
     margin-left: auto;
 }
 
-/* Search and regex glyphs in white: the stock icon files are used as masks over a white
-   box instead of as (blue) background images. An <input> has no pseudo-elements, so the
+/* Search and regex glyphs in the icon color: the stock icon files are used as masks over a
+   plain box instead of as (blue) background images. An <input> has no pseudo-elements, so the
    search glyph is drawn by the surrounding toolbar, over the left end of the field. */
 #torrentsFilterInput,
 #torrentsFilterRegexBox + label,
@@ -213,7 +231,7 @@
 
 #torrentsFilterToolbar::before,
 #torrentsFilterRegexBox + label::before {
-    background-color: #ffffff;
+    background-color: var(--theme-glyph);
     content: "";
     height: 16px;
     mask: url("../images/edit-find.svg") center / contain no-repeat;
@@ -274,7 +292,7 @@ ul.filterList span.link {
 }
 
 .altRowColors tbody tr:nth-child(odd of :not(.invisible)) {
-    background-color: rgb(255 255 255 / 3%);
+    background-color: var(--theme-row-tint);
 }
 
 /* The bar draws inside a shadow root but reads these inherited variables */
@@ -282,7 +300,7 @@ progress-bar {
     --color-background-blue: var(--theme-progress);
     --color-background-default: var(--theme-panel);
     --color-border-default: transparent;
-    --color-text-default: #ffffff;
+    --color-text-white: #ffffff; /* text over the filled part */
 
     border-radius: 3px;
     overflow: hidden;
@@ -315,13 +333,13 @@ progress-bar {
 }
 
 #propertiesTabs li img {
-    filter: brightness(0) invert(80%);
+    filter: var(--theme-icon-muted);
 }
 
-/* Show/hide toggle of the properties panel: the stock blue arrow, drawn white */
+/* Show/hide toggle of the properties panel: the stock blue arrow, in the icon color */
 .panel-collapse,
 .panel-expand {
-    filter: brightness(0) invert(100%);
+    filter: var(--theme-icon);
 }
 
 /* ---------------------------------------------------------------
