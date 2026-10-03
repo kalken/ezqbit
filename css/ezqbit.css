@@ -16,7 +16,7 @@
     --theme-hairline: rgb(0 0 0 / 28%); /* every 1px line: panel edges, toolbar dividers */
     --theme-edge-shadow: rgb(0 0 0 / 30%); /* small 4px shadow beside panel and window edges */
     --theme-footer-height: 44px;
-    --theme-progress: linear-gradient(90deg, #3aa655 0%, #b9b745 100%);
+    --theme-progress: linear-gradient(90deg, #b9b745 0%, #3aa655 100%);
 
     /* Map onto the stock WebUI variables */
     --color-accent-blue: hsl(210deg 65% 55%);
@@ -62,19 +62,8 @@
 }
 
 .panel,
-.panel-header,
-.columnHandle {
+.panel-header {
     border-color: transparent;
-}
-
-/* No border at all here (not just a transparent one), so the sidebar reaches right down
-   to the status bar and nothing shows through between them */
-#pageWrapper {
-    border: 0;
-}
-
-.columnHandle {
-    background-image: none;
 }
 
 .horizontalHandle .handleIcon {
@@ -97,32 +86,28 @@
     padding-top: 8px;
 }
 
-/* Lifted above the status bar's hairline, so that starts at the sidebar's right
-   edge instead of running across the bottom of the sidebar */
-#filtersColumn {
-    background-color: var(--theme-panel);
-    z-index: 1;
-}
-
 /* The sidebar gets the same hairline on its right side as the top bar has below it. The
    column handle carries it, since it is the sidebar's right edge, and its ::after continues
-   the line down across the status bar, so the sidebar reads as running to the bottom of the
-   window with the status bar beside it. That needs the two clipping ancestors opened up. */
-#pageWrapper,
-#filtersColumn_handle {
+   the line down beside the status bar, so the sidebar reads as running to the bottom of the
+   window. For that, the handle and #pageWrapper must not clip, and #pageWrapper has no
+   border, so nothing separates the sidebar from the area below it. */
+#pageWrapper {
+    border: 0;
     overflow: visible;
 }
 
 #filtersColumn_handle,
 #filtersColumn_handle::after {
-    background-color: var(--theme-panel);
+    background: var(--theme-panel);
     box-shadow: 1px 0 0 var(--theme-hairline), 1px 0 4px var(--theme-edge-shadow);
 }
 
 #filtersColumn_handle {
+    anchor-name: --theme-sidebar-edge; /* the status bar starts here, see below */
     border: 0; /* so ::after spans its full width */
     /* keeps the shadow to the right side only */
     clip-path: inset(0 -6px calc(-1 * var(--theme-footer-height)) 0);
+    overflow: visible;
     position: relative;
     z-index: 1;
 }
@@ -198,10 +183,14 @@
     margin-left: auto;
 }
 
+/* Search and regex glyphs in white: the stock icon files are used as masks over a white
+   box instead of as (blue) background images. An <input> has no pseudo-elements, so the
+   search glyph is drawn by the surrounding toolbar, over the left end of the field. */
 #torrentsFilterInput,
 #torrentsFilterRegexBox + label,
+#torrentsFilterRegexBox:checked + label,
 #torrentsFilterSelect {
-    background-color: var(--theme-control);
+    background: var(--theme-control);
     border-color: transparent;
     border-radius: 6px;
     height: 30px;
@@ -213,17 +202,9 @@
     padding-left: 30px;
 }
 
-#torrentsFilterRegexBox + label {
-    width: 30px;
-}
-
-/* Search and regex glyphs in white: the stock icon files are used as masks over a white
-   box instead of as (blue) background images. An <input> has no pseudo-elements, so the
-   search glyph is drawn by the surrounding toolbar, over the left end of the field. */
-#torrentsFilterInput,
 #torrentsFilterRegexBox + label,
 #torrentsFilterRegexBox:checked + label {
-    background-image: none;
+    width: 30px;
 }
 
 #torrentsFilterToolbar::before,
@@ -338,28 +319,21 @@ progress-bar {
 --------------------------------------------------------------- */
 
 /* Taller, centered, no separator glyphs; mocha measures this height, so the layout follows */
-#desktopFooterWrapper,
 #desktopFooter {
     height: var(--theme-footer-height);
 }
 
-/* The status bar starts at the sidebar's right edge instead of the window's left edge, so
-   its contents never run in under the sidebar when the window is narrow. CSS anchor
-   positioning reads where that edge is (the sidebar is resizable); with the sidebar
-   hidden, or in a browser without anchor positioning, it stays full width. */
-#filtersColumn_handle {
-    anchor-name: --theme-sidebar-edge;
-}
-
+/* Same hairline as the top bar, along the top. The bar starts at the sidebar's right edge
+   instead of the window's left edge, so its contents never run in under the sidebar when
+   the window is narrow. CSS anchor positioning reads where that edge is (the sidebar is
+   resizable); with the sidebar hidden, or in a browser without anchor positioning, it
+   stays full width. */
 #desktopFooterWrapper {
+    box-shadow: 0 -1px 0 var(--theme-hairline), 0 -1px 4px var(--theme-edge-shadow);
+    height: var(--theme-footer-height);
     left: anchor(--theme-sidebar-edge right, 0px);
     right: 0;
     width: auto;
-}
-
-/* Same hairline as the top bar, along the top */
-#desktopFooterWrapper {
-    box-shadow: 0 -1px 0 var(--theme-hairline), 0 -1px 4px var(--theme-edge-shadow);
 }
 
 #desktopFooter {

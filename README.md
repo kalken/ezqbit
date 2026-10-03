@@ -7,7 +7,7 @@ A flat dark alternative WebUI for qBittorrent:
 - sidebar with pill selection and bold section titles
 - white toolbar icons, hairline dividers, search field and tabs on the right
 - General / Trackers / Peers / … as chips
-- green→yellow progress bars
+- yellow→green progress bars
 - dark dialogs, menus and login page
 
 This repo contains only the theme's CSS. `build.sh` (or `build.ps1` on Windows) combines it with
