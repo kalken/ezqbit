@@ -91,11 +91,11 @@
     padding-top: 8px;
 }
 
-/* The sidebar gets the same hairline and shadow on its right side as the top bar has below it. The
-   column handle carries it, since it is the sidebar's right edge, and its ::after continues
-   it down beside the status bar, so the sidebar reads as running to the bottom of the
-   window. For that, the handle and #pageWrapper must not clip, and #pageWrapper has no
-   border, so nothing separates the sidebar from the area below it. */
+/* The sidebar gets the same hairline and shadow on its right side as the top bar has below
+   it. The column handle carries them, since it is the sidebar's right edge, and its ::after
+   continues them down beside the status bar, so the sidebar reads as running to the bottom
+   of the window. For that, the handle and #pageWrapper must not clip, and #pageWrapper has
+   no border, so nothing separates the sidebar from the area below it. */
 #pageWrapper {
     border: 0;
     overflow: visible;
@@ -104,20 +104,24 @@
 #filtersColumn_handle {
     anchor-name: --theme-sidebar-edge; /* the status bar starts here, see below */
     background: var(--theme-panel);
-    border: 0; /* so ::after spans its full width */
-    /* keeps the shadow to the right side only */
-    clip-path: inset(0 -8px calc(-1 * var(--theme-footer-height)) 0);
+    border: 0;
     overflow: visible;
     position: relative;
     z-index: 1;
 }
 
-/* One box for the whole height, so the line and shadow are a single unbroken strip */
+/* One box for the whole height: the handle's own width in the panel colour, then a 7px
+   strip to its right holding the line and the shadow. They are painted as gradients, not
+   a box-shadow: a box-shadow also spreads left, under the handle's left edge, and shows
+   there as a dark seam when the browser is zoomed to a fractional scale. */
 #filtersColumn_handle::after {
-    background: var(--theme-panel);
-    box-shadow: 1px 0 0 var(--theme-hairline), 1px 0 6px var(--theme-edge-shadow);
+    background:
+        linear-gradient(var(--theme-hairline) 0 0) calc(100% - 6px) 0 / 1px 100% no-repeat,
+        linear-gradient(90deg, color-mix(in srgb, var(--theme-edge-shadow) 45%, transparent), transparent)
+            right / 7px 100% no-repeat,
+        linear-gradient(var(--theme-panel) 0 0) left / calc(100% - 7px) 100% no-repeat;
     content: "";
-    inset: 0 0 calc(-1 * var(--theme-footer-height));
+    inset: 0 -7px calc(-1 * var(--theme-footer-height)) 0;
     pointer-events: none;
     position: absolute;
 }
