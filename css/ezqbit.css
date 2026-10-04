@@ -51,7 +51,6 @@
 
     --color-accent-blue: hsl(210deg 65% 55%);
     --color-text-blue: hsl(210deg 88% 73%);
-    --color-text-orange: hsl(26deg 65% 70%);
     --color-text-green: hsl(134deg 55% 55%);
     --color-text-default: #e6e6e6;
     --color-text-white: #ffffff;
@@ -115,17 +114,13 @@
 }
 
 /* The sidebar gets the same hairline and shadow on its right side as the top bar has below
-   it. The column handle carries them, since it is the sidebar's right edge, and its ::after
-   continues them down beside the status bar, so the sidebar reads as running to the bottom
-   of the window. For that, the handle and #pageWrapper must not clip, and #pageWrapper has
-   no border, so nothing separates the sidebar from the area below it. */
+   it. The column handle carries them, since it is the sidebar's right edge; for that the
+   handle must not clip. #pageWrapper has no border: the bars' own hairlines edge it. */
 #pageWrapper {
     border: 0;
-    overflow: visible;
 }
 
 #filtersColumn_handle {
-    anchor-name: --theme-sidebar-edge; /* the status bar starts here, see below */
     background: var(--theme-panel);
     border: 0;
     overflow: visible;
@@ -144,7 +139,7 @@
             right / 7px 100% no-repeat,
         linear-gradient(var(--theme-panel) 0 0) left / calc(100% - 7px) 100% no-repeat;
     content: "";
-    inset: 0 -7px calc(-1 * var(--theme-footer-height)) 0;
+    inset: 0 -7px 0 0;
     pointer-events: none;
     position: absolute;
 }
@@ -214,7 +209,6 @@
 }
 
 #mainWindowTabs {
-    float: none;
     margin: 0 0 0 8px;
     order: 2;
 }
@@ -372,28 +366,20 @@ progress-bar {
    Status bar
 --------------------------------------------------------------- */
 
-/* Taller, centered, no separator glyphs; mocha measures this height, so the layout follows */
-#desktopFooter {
-    height: var(--theme-footer-height);
-}
-
-/* Same hairline and shadow as the top bar, along the top. The bar starts at the sidebar's right edge
-   instead of the window's left edge, so its contents never run in under the sidebar when
-   the window is narrow. CSS anchor positioning reads where that edge is (the sidebar is
-   resizable); with the sidebar hidden, or in a browser without anchor positioning, it
-   stays full width. */
+/* Same hairline and shadow as the top bar, along the top. z-index so they are drawn over
+   the sidebar's edge strip, which would otherwise break the line where the two meet. */
 #desktopFooterWrapper {
     box-shadow: 0 -1px 0 var(--theme-hairline), 0 -1px 6px var(--theme-edge-shadow);
     height: var(--theme-footer-height);
-    left: anchor(--theme-sidebar-edge right, 0px);
-    right: 0;
-    width: auto;
+    z-index: 2;
 }
 
+/* Taller, centered, no separator glyphs; mocha measures this height, so the layout follows */
 #desktopFooter {
     align-items: center;
     display: flex;
     font-size: 12px;
+    height: var(--theme-footer-height);
     padding: 0 14px;
 }
 
