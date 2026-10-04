@@ -15,14 +15,13 @@
     --theme-panel: #f0f0f0; /* toolbar, sidebar, status bar */
     --theme-content: #ffffff; /* torrent list, properties */
     --theme-control: #e2e2e2; /* search field, selection, chips on hover */
-    --theme-hairline: rgb(0 0 0 / 12%); /* every 1px line: panel edges, toolbar dividers */
+    --theme-hairline: rgb(0 0 0 / 12%); /* every 1px line: panel edges, toolbar and status bar dividers */
     --theme-edge-shadow: rgb(0 0 0 / 14%); /* small 6px shadow beside panel and window edges */
     --theme-icon: brightness(0) invert(35%); /* stock icons drawn in one color: toolbar, tabs, toggle */
     --theme-icon-muted: brightness(0) invert(35%); /* General / Trackers / … icons */
     --theme-glyph: #595959; /* search and regex glyphs */
     --theme-row-tint: rgb(0 0 0 / 4%); /* alternating rows */
     --theme-scrollbar: #c2c2c2;
-    --theme-footer-height: 44px;
     --theme-progress: linear-gradient(90deg, #b9b745 0%, #3aa655 100%);
 
     /* Map onto the stock WebUI variables */
@@ -366,35 +365,18 @@ progress-bar {
    Status bar
 --------------------------------------------------------------- */
 
-/* Same hairline and shadow as the top bar, along the top. z-index so they are drawn over
-   the sidebar's edge strip, which would otherwise break the line where the two meet. */
+/* Stock layout. The bar gets the same hairline and shadow as the top bar, along its top;
+   z-index so they are drawn over the sidebar's edge strip, which would otherwise break the
+   line where the two meet. */
 #desktopFooterWrapper {
     box-shadow: 0 -1px 0 var(--theme-hairline), 0 -1px 6px var(--theme-edge-shadow);
-    height: var(--theme-footer-height);
     z-index: 2;
 }
 
-/* Taller, centered, no separator glyphs; mocha measures this height, so the layout follows */
-#desktopFooter {
-    align-items: center;
-    display: flex;
-    font-size: 12px;
-    height: var(--theme-footer-height);
-    padding: 0 14px;
-}
-
-#desktopFooter table {
-    margin: 0 auto !important;
-}
-
-#desktopFooter td {
-    vertical-align: middle;
-    white-space: nowrap;
-}
-
+/* The stock divider image is white and light grey, which glares in the dark theme; draw
+   the toolbar's divider line in its place */
 td.statusBarSeparator {
-    background-image: none;
-    width: 32px;
+    background: linear-gradient(var(--theme-hairline) 0 0) center 1px / 1px 18px no-repeat;
 }
 
 /* ---------------------------------------------------------------
