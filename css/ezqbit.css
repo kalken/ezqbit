@@ -312,6 +312,12 @@ progress-bar {
 
     border-radius: 3px;
     overflow: hidden;
+
+    /* Taller bar. The script fixes the height at 12px inside the shadow root, out of reach
+       of a stylesheet, so the whole element is scaled instead (12px → 17px) and the text
+       scaled back down to stay the same size. */
+    font-size: calc(100% / 1.4);
+    zoom: 1.4;
 }
 
 /* ---------------------------------------------------------------
