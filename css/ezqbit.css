@@ -166,9 +166,21 @@
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 5px;
     margin-top: 0;
-    padding: 10px 14px;
+    padding: 10px 14px 10px 2px;
+}
+
+/* The stock markup starts the toolbar with two non-breaking spaces, which would sit as an
+   invisible item before the first button. Zero font size collapses them (the toolbar's
+   real children get their size back), and the left padding above is what remains to line
+   the first icon up with the sidebar's icons. */
+#mochaToolbar {
+    font-size: 0;
+}
+
+#mochaToolbar > * {
+    font-size: 12px;
 }
 
 /* Lets the queue buttons line up as toolbar items like the rest */
@@ -178,7 +190,7 @@
 
 .mochaToolButton {
     display: block;
-    margin: 0 5px;
+    margin: 0 4px;
 }
 
 /* Stock icons in one color: toolbar buttons and the Transfers / Search / … tabs */
@@ -188,8 +200,8 @@
 
 #mochaToolbar .divider {
     background: linear-gradient(var(--theme-hairline) 0 0) left center / 1px 100% no-repeat;
-    margin-left: 8px;
-    padding: 8px 0 8px 14px;
+    margin-left: 7px;
+    padding: 8px 0 8px 12px;
 }
 
 #torrentsFilterToolbar:not(.invisible) {
