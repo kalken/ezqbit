@@ -161,7 +161,8 @@
     z-index: 2;
 }
 
-#mochaToolbar {
+/* :not(.invisible) so View → Top Toolbar can still hide it */
+#mochaToolbar:not(.invisible) {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
