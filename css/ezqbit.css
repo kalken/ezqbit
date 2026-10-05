@@ -162,7 +162,7 @@
     flex-wrap: wrap;
     gap: 5px;
     margin-top: 0;
-    padding: 6px 14px 8px 2px;
+    padding: 8px 14px 8px 2px;
 }
 
 /* The stock markup starts the toolbar with two non-breaking spaces, which would sit as an
