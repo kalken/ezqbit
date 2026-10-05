@@ -144,7 +144,7 @@
 }
 
 /* ---------------------------------------------------------------
-   Toolbar: one row, hairline dividers, search and tabs on the right
+   Toolbar: one row, hairline dividers, search in the middle, tabs on the right
 --------------------------------------------------------------- */
 
 /* The top bar is edged by a hairline and a small shadow along its bottom.
@@ -202,7 +202,7 @@
     align-items: center;
     display: flex;
     gap: 6px;
-    margin-left: auto;
+    margin: 0 auto;
     order: 1;
     position: relative;
 }
