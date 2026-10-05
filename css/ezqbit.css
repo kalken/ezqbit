@@ -144,7 +144,7 @@
 }
 
 /* ---------------------------------------------------------------
-   Toolbar: one roomy row, hairline dividers, search and tabs on the right
+   Toolbar: one row, hairline dividers, search and tabs on the right
 --------------------------------------------------------------- */
 
 /* The top bar is edged by a hairline and a small shadow along its bottom.
@@ -162,7 +162,7 @@
     flex-wrap: wrap;
     gap: 5px;
     margin-top: 0;
-    padding: 10px 14px 10px 2px;
+    padding: 6px 14px 8px 2px;
 }
 
 /* The stock markup starts the toolbar with two non-breaking spaces, which would sit as an
@@ -195,7 +195,7 @@
 #mochaToolbar .divider {
     background: linear-gradient(var(--theme-hairline) 0 0) left center / 1px 100% no-repeat;
     margin-left: 7px;
-    padding: 8px 0 8px 12px;
+    padding: 0 0 0 12px;
 }
 
 #torrentsFilterToolbar:not(.invisible) {
@@ -226,7 +226,7 @@
     background: var(--theme-control);
     border-color: transparent;
     border-radius: 6px;
-    height: 30px;
+    height: 26px;
     margin: 0;
 }
 
@@ -237,7 +237,7 @@
 
 #torrentsFilterRegexBox + label,
 #torrentsFilterRegexBox:checked + label {
-    width: 30px;
+    width: 26px;
 }
 
 #torrentsFilterToolbar::before,
@@ -257,7 +257,7 @@
 
 #torrentsFilterRegexBox + label::before {
     display: block;
-    margin: 6px;
+    margin: 4px;
     mask-image: url("../images/regex.svg");
 }
 
