@@ -275,6 +275,11 @@
     text-transform: none;
 }
 
+/* The collapse arrows beside the section titles, in the icon color */
+.filterTitle img {
+    filter: var(--theme-icon);
+}
+
 ul.filterList span.link {
     border-radius: 0 999px 999px 0;
     gap: 8px;
@@ -376,6 +381,11 @@ progress-bar {
 /* Centered instead of pushed to the right; !important because the stock margins are inline */
 #desktopFooter table {
     margin: 0 auto !important;
+}
+
+/* Download and upload arrows in the icon color */
+td.speedLabel img {
+    filter: var(--theme-icon);
 }
 
 /* The stock divider image is white and light grey, which glares in the dark theme; draw
