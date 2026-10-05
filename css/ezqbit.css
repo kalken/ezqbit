@@ -365,12 +365,17 @@ progress-bar {
    Status bar
 --------------------------------------------------------------- */
 
-/* Stock layout. The bar gets the same hairline and shadow as the top bar, along its top;
+/* Stock height and spacing. The bar gets the same hairline and shadow as the top bar, along its top;
    z-index so they are drawn over the sidebar's edge strip, which would otherwise break the
    line where the two meet. */
 #desktopFooterWrapper {
     box-shadow: 0 -1px 0 var(--theme-hairline), 0 -1px 6px var(--theme-edge-shadow);
     z-index: 2;
+}
+
+/* Centered instead of pushed to the right; !important because the stock margins are inline */
+#desktopFooter table {
+    margin: 0 auto !important;
 }
 
 /* The stock divider image is white and light grey, which glares in the dark theme; draw
