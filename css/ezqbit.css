@@ -22,7 +22,7 @@
     --theme-glyph: #595959; /* search and regex glyphs */
     --theme-row-tint: rgb(0 0 0 / 4%); /* alternating rows */
     --theme-scrollbar: #c2c2c2;
-    --theme-progress: linear-gradient(90deg, #b9b745 0%, #3aa655 100%);
+    --theme-progress: linear-gradient(90deg, #8f9a2c 0%, #2f8a47 100%);
 
     /* Map onto the stock WebUI variables */
     --color-text-default: #262626;
@@ -320,6 +320,8 @@ progress-bar {
     --color-border-default: transparent;
     --color-text-white: #ffffff; /* text over the filled part */
 
+    text-shadow: 0 1px 2px rgb(0 0 0 / 55%); /* inherited into the shadow root */
+    font-weight: 600;
     border-radius: 3px;
     overflow: hidden;
 
