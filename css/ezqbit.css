@@ -147,12 +147,21 @@
    Toolbar: one row, hairline dividers, search in the middle, tabs on the right
 --------------------------------------------------------------- */
 
-/* The top bar is edged by a hairline and a small shadow along its bottom.
-   z-index because #pageWrapper is positioned and would otherwise paint over the shadow. */
-#desktopHeader {
-    box-shadow: 0 1px 0 var(--theme-hairline), 0 1px 6px var(--theme-edge-shadow);
-    position: relative;
-    z-index: 3; /* above the status bar (2), so the open menus are not drawn under it */
+/* The top bar is edged by a hairline and a small shadow along its bottom. They are drawn from
+   the top of #pageWrapper, not as a box-shadow of the bar: #pageWrapper is positioned and
+   would paint over it, and giving the bar a z-index to win would trap the menus below the
+   table header. The strip sits above the table header (10) and below the menus (8000). */
+#pageWrapper::before {
+    background:
+        linear-gradient(var(--theme-hairline) 0 0) top / 100% 1px no-repeat,
+        linear-gradient(color-mix(in srgb, var(--theme-edge-shadow) 70%, transparent), transparent)
+            top / 100% 6px no-repeat;
+    content: "";
+    height: 6px;
+    inset: 0 0 auto;
+    pointer-events: none;
+    position: absolute;
+    z-index: 11;
 }
 
 /* :not(.invisible) so View → Top Toolbar can still hide it */
