@@ -152,7 +152,7 @@
 #desktopHeader {
     box-shadow: 0 1px 0 var(--theme-hairline), 0 1px 6px var(--theme-edge-shadow);
     position: relative;
-    z-index: 2;
+    z-index: 3; /* above the status bar (2), so the open menus are not drawn under it */
 }
 
 /* :not(.invisible) so View → Top Toolbar can still hide it */
