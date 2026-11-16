@@ -301,7 +301,6 @@ ul.filterList span.link {
 --------------------------------------------------------------- */
 
 .dynamicTable th {
-    background-color: var(--theme-content);
     border-right-color: transparent;
     font-weight: normal;
     padding: 8px 6px;
@@ -309,7 +308,6 @@ ul.filterList span.link {
 
 #propertiesPanel .dynamicTableFixedHeaderDiv,
 #torrentsTableFixedHeaderDiv {
-    background-color: var(--theme-content);
     border-bottom-color: transparent;
 }
 
@@ -321,10 +319,6 @@ ul.filterList span.link {
 /* :where() keeps this as weak as the stock rule it replaces, so the stock hover and
    selection colors still win on tinted rows */
 :where(.altRowColors) tbody tr:nth-child(odd of :not(.invisible)) {
-    background-color: transparent;
-}
-
-:where(.altRowColors) tbody tr:nth-child(even of :not(.invisible)) {
     background-color: var(--theme-row-tint);
 }
 
