@@ -21,6 +21,7 @@
     --theme-icon-muted: brightness(0) invert(35%); /* General / Trackers / … icons */
     --theme-glyph: #595959; /* search and regex glyphs */
     --theme-row-tint: rgb(0 0 0 / 4%); /* alternating rows */
+    --theme-box-edge: rgb(0 0 0 / 6%); /* quiet boxes in the General tab */
     --theme-scrollbar: #c2c2c2;
     --theme-progress: linear-gradient(90deg, #8f9a2c 0%, #2f8a47 100%);
 
@@ -46,6 +47,7 @@
     --theme-icon-muted: brightness(0) invert(80%);
     --theme-glyph: #ffffff;
     --theme-row-tint: rgb(255 255 255 / 3%);
+    --theme-box-edge: rgb(255 255 255 / 5%);
     --theme-scrollbar: #444444;
 
     --color-accent-blue: hsl(210deg 65% 55%);
@@ -415,4 +417,15 @@ td.statusBarSeparator {
     border-radius: 10px;
     box-shadow: 0 0 0 1px var(--theme-hairline), 0 0 6px var(--theme-edge-shadow);
 }
+}
+
+/* General tab: quieter boxes around Transfer and Information */
+#propertiesPanel fieldset {
+    border-color: var(--theme-box-edge);
+}
+
+/* The progress and availability bars draw their border inline from this variable */
+#progress > *,
+#availability > * {
+    --color-border-default: var(--theme-box-edge);
 }
