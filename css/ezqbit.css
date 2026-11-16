@@ -301,6 +301,7 @@ ul.filterList span.link {
 --------------------------------------------------------------- */
 
 .dynamicTable th {
+    background-color: var(--theme-content);
     border-right-color: transparent;
     font-weight: normal;
     padding: 8px 6px;
@@ -308,6 +309,7 @@ ul.filterList span.link {
 
 #propertiesPanel .dynamicTableFixedHeaderDiv,
 #torrentsTableFixedHeaderDiv {
+    background-color: var(--theme-content);
     border-bottom-color: transparent;
 }
 
