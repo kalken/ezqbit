@@ -318,6 +318,10 @@ ul.filterList span.link {
 
 /* :where() keeps this as weak as the stock rule it replaces, so the stock hover and
    selection colors still win on tinted rows */
+:where(.altRowColors) tbody tr:nth-child(odd of :not(.invisible)) {
+    background-color: transparent;
+}
+
 :where(.altRowColors) tbody tr:nth-child(even of :not(.invisible)) {
     background-color: var(--theme-row-tint);
 }
